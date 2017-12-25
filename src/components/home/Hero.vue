@@ -1,12 +1,12 @@
 <template>
-  <section class="hero">
+  <section class="hero is-medium">
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
-          다
+          {{ meta.title }}
         </h1>
         <h2 class="subtitle">
-          Hero subtitle
+          {{ meta.description }}
         </h2>
       </div>
     </div>
@@ -15,7 +15,9 @@
 
 <script>
 export default {
-
+  props: [
+    'meta'
+  ]
 }
 </script>
 

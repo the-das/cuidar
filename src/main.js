@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 import Home from 'components/Home.vue'
 import Quiz from 'components/Quiz.vue'
+import store from 'store'
 
 Vue.use(VueRouter)
 
@@ -19,5 +20,6 @@ const router = new VueRouter({
 new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App)
 })
