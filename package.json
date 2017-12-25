@@ -1,0 +1,8 @@
+{
+  "name": "cuidar",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/the-das/cuidar.git",
+  "author": "Phil <youngphil.gim@gmail.com>",
+  "license": "MIT"
+}
