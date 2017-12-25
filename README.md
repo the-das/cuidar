@@ -1,2 +1,18 @@
 # cuidar
-> 1.신경을 쓰다 2.보살피다, 돌보다 3.자신의 몸에 신경을 쓰다
+
+> A Vue.js project
+
+## Build Setup
+
+``` bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+```
+
+For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
