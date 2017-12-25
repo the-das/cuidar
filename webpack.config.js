@@ -1,13 +1,31 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
-  entry: './src/main.js',
+  entry: {
+    app: './src/main',
+    vendor: './src/vendor'
+  },
+
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'build.js'
+    filename: '[name].build.js'
   },
+
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+      api: path.resolve(__dirname, './src/api'),
+      components: path.resolve(__dirname, './src/components'),
+      store: path.resolve(__dirname, './src/store'),
+      template: path.resolve(__dirname, './src/template')
+    },
+    extensions: ['*', '.js', '.vue', '.json']
+  },
+
   module: {
     rules: [
       {
@@ -39,26 +57,37 @@ module.exports = {
       }
     ]
   },
-  resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js'
-    },
-    extensions: ['*', '.js', '.vue', '.json']
-  },
+
+  plugins: [
+    // new CopyWebpackPlugin([
+    //   { from: 'src/assets/images', to: '' },
+    // ]),
+    new HtmlWebpackPlugin({
+      template: './src/assets/index.html'
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ['vendor', 'manifest']
+    }),
+    new CleanWebpackPlugin('dist'),
+  ],
+
   devServer: {
     historyApiFallback: true,
     noInfo: true,
     overlay: true
   },
+
   performance: {
     hints: false
   },
+
   devtool: '#eval-source-map'
 }
 
 if (process.env.NODE_ENV === 'production') {
+
   module.exports.devtool = '#source-map'
-  // http://vue-loader.vuejs.org/en/workflow/production.html
+
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {
