@@ -1,0 +1,22 @@
+{
+  "title": "Das Quiz",
+  "description": "다스는 누구꺼?",
+  "publishDate": "12/25/2017",
+  "course": [
+    {
+      "title": "초심자",
+      "file": "das.beginner.json",
+      "content": 10
+    },
+    {
+      "title": "중급자",
+      "file": "das.intermediate.json",
+      "content": 10
+    },
+    {
+      "title": "전문가",
+      "file": "das.beginner.json",
+      "content": 10
+    }
+  ]
+}

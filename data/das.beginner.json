@@ -1,0 +1,30 @@
+{
+  "title": "다스는 누구꺼?",
+  "subject": "초심자",
+  "time": "10분",
+  "content": [
+    {
+      "question": "1 + 2 = ?",
+      "text": "1 + 1 = 2,\n 1 + 2 = ?,\n 1 + 3 = 4",
+      "example": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "answer": 3,
+      "explanation": "1 + 2 = 3"
+    },
+    {
+      "question": "6 * 9 = ?",
+      "example": [
+        "44",
+        "45",
+        "54",
+        "55"
+      ],
+      "answer": 3,
+      "explanation": "6 * 9 = 54"
+    }
+  ]
+}
