@@ -16,15 +16,15 @@
       "explanation": "1 + 2 = 3"
     },
     {
-      "question": "6 * 9 = ?",
+      "question": "10 + 1 = ?",
       "example": [
-        "44",
-        "45",
-        "54",
-        "55"
+        "10",
+        "11",
+        "12",
+        "13"
       ],
-      "answer": 3,
-      "explanation": "6 * 9 = 54"
+      "answer": 2,
+      "explanation": "10 + 1 = 11"
     }
   ]
 }
