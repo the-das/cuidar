@@ -35,21 +35,21 @@ const state = {
    *   ]
    *  }
    */
-   },
-
+  },
+  currentLevel: undefined,
 }
 
 const getters = {
+  currentQuiz: (state) => state.content[state.currentLevel]
 }
 
 const mutations = {
   [types.RECEIVE_QUIZ] (state, {level, quiz}) {
     state.content[level] = quiz
   },
-  [types.SELECT_QUIZ] (state, {symbol}) {
-    const hero = state.content.find(hero => hero.symbol === symbol)
-    hero.enable = !hero.enable
-  }
+  [types.SELECT_LEVEL] (state, {level}) {
+    state.currentLevel = level
+  },
 }
 
 const actions = {

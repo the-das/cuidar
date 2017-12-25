@@ -12,7 +12,7 @@
         "3",
         "4"
       ],
-      "answer": 3,
+      "answer": [3],
       "explanation": "1 + 2 = 3"
     },
     {
