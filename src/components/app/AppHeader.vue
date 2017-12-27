@@ -6,12 +6,8 @@
       </div>
       <div class="navbar-menu is-active">
         <div class="navbar-end">
-          <a class="navbar-item">
-            Home
-          </a>
-          <a class="navbar-item">
-            Quiz
-          </a>
+          <router-link class="navbar-item" to="/">Home</router-link>
+          <router-link class="navbar-item" to="/quiz">Quiz</router-link>
         </div>
       </div>
     </div>
