@@ -36,11 +36,17 @@ const state = {
    *  }
    */
   },
+  result: {
+    beginner: [],
+    intermediate: [],
+    export: [],
+  },
   currentLevel: undefined,
 }
 
 const getters = {
-  currentQuiz: (state) => state.content[state.currentLevel]
+  currentQuiz: (state) => state.content[state.currentLevel],
+  currentResult: (state) => state.result[state.currentLevel],
 }
 
 const mutations = {
