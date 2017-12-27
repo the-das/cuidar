@@ -8,6 +8,7 @@
         <div class="navbar-end">
           <router-link class="navbar-item" to="/">Home</router-link>
           <router-link class="navbar-item" to="/quiz">Quiz</router-link>
+          <router-link class="navbar-item" to="/video">Video</router-link>
           <router-link class="navbar-item" to="/about">About</router-link>
         </div>
       </div>
