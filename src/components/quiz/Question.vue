@@ -8,99 +8,114 @@
       <div class="field-body">
         <div class="field">
           <p class="control">
-            <input class="input is-static" type="email" value="1 + 2 = ?" readonly>
+            <input class="input is-static" type="text" v-bind:value="question.question" readonly>
           </p>
         </div>
       </div>
     </div>
-    <!-- Text -->
-    <div class="field is-horizontal">
-      <div class="field-label is-normal"></div>
-      <div class="field-body">
-        <div class="field">
-          <div class="control">
-            <textarea class="textarea" type="text" readonly>1 + 1 = 2,/n 1 + 2 = ?,\n 1 + 3 = 4 one two three four five six seven eight nine ten 하나 둘 셋 넷 다섯 여섯 일곱 여덜 아홉 열</textarea>
+    <template v-if="question.text">
+      <!-- Text -->
+      <div class="field is-horizontal">
+        <div class="field-label is-normal"></div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <textarea class="textarea" type="text" readonly v-model="question.text"></textarea>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </template>
     <!-- Example -->
     <div class="field is-horizontal">
       <div class="field-label is-normal"></div>
       <div class="field-body">
         <div class="field">
-          <div class="control">
+          <div class="control" v-for="(el, index) in question.example" v-bind:key="index">
             <label class="radio">
-              <input type="radio" name="rsvp">
-              React
-            </label>
-          </div>
-          <div class="control">
-            <label class="radio">
-              <input type="radio" name="rsvp">
-              Polymer
-            </label>
-          </div>
-          <div class="control">
-            <label class="radio">
-              <input type="radio" name="rsvp">
-              Angular
-            </label>
-          </div>
-          <div class="control">
-            <label class="radio">
-              <input type="radio" name="rsvp">
-              Vue
+              <input type="radio" name="question-example" v-bind:value="index + 1" v-model="selected" v-bind:disabled="question.reply">
+              {{ el }}
             </label>
           </div>
         </div>
       </div>
     </div>
-    <!-- Check Result -->
-    <div class="field is-horizontal">
-      <div class="field-label"></div>
-      <div class="field-body">
-        <div class="field">
-          <div class="control">
-            <button class="button is-primary" disabled>
-              확인
-            </button>
+    <template v-if="!question.reply">
+      <!-- Check Result -->
+      <div class="field is-horizontal">
+        <div class="field-label"></div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <button class="button is-primary"
+                v-bind:disabled="!selected"
+                v-on:click="checkReply">
+                정답 확인
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- Question -->
-    <div class="field is-horizontal">
-      <div class="field-label is-normal">
-        <label class="label">해설</label>
-      </div>
-      <div class="field-body">
-        <div class="field">
-          <p class="control">
-            <input class="input is-static" type="email" value="1 + 2 = 3" readonly>
-          </p>
+    </template>
+    <template v-else>
+      <!-- Question -->
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">해설</label>
         </div>
-      </div>
-    </div>
-    <!-- Check Result -->
-    <div class="field is-horizontal">
-      <div class="field-label"></div>
-      <div class="field-body">
-        <div class="field">
-          <div class="control">
-            <button class="button is-primary" disabled>
-              다음
-            </button>
+        <div class="field-body">
+          <div class="field">
+            <p class="control">
+              <input class="input is-static" type="text" v-bind:value="question.explanation" readonly>
+            </p>
           </div>
         </div>
       </div>
-    </div>
+      <!-- Check Result -->
+      <div class="field is-horizontal">
+        <div class="field-label"></div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <span class="tag is-rounded is-medium">{{ question.answer == question.reply ? '정답' : '틀림' }}</span>
+              <button class="button is-primary">
+                다음 문제
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
 <script>
 export default {
 
+  data() {
+    return {
+      selected: undefined,
+      question: {
+        "question": "Vue + Vuex = ?",
+        "text": "1 + 1 = 2,\n1 + 2 = ?,\n1 + 3 = 4",
+        "example": [
+          "React",
+          "Polymer",
+          "Angular",
+          "Vue"
+        ],
+        "answer": "4",
+        "explanation": "Vue + Vuex = Vue",
+        "reply": undefined,
+      },
+    }
+  },
+
+  methods: {
+    checkReply() {
+      this.question.reply = this.selected
+    },
+  },
 }
 </script>
 
