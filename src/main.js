@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import App from './App.vue'
 import Home from 'components/Home.vue'
+import CourseContainer from 'components/CourseContainer.vue'
 import Quiz from 'components/Quiz.vue'
 import Channel from 'components/Channel.vue'
 import store from 'store'
@@ -11,6 +12,7 @@ Vue.use(VueRouter)
 
 const routes = [
   { path: '/', component: Home },
+  { path: '/quiz', component: CourseContainer },
   { path: '/quiz/:level', component: Quiz },
   { path: '/channel', component: Channel },
 ]
