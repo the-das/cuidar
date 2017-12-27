@@ -4,12 +4,14 @@
       <div class="container">
         <div class="columns">
           <div class="column is-half is-offset-one-quarter">
-            <process></process>
+            <quiz-process></quiz-process>
           </div>
         </div>
         <div class="columns">
           <div class="column is-half is-offset-one-quarter">
-            <question></question>
+            <quiz-starting></quiz-starting>
+            <quiz-question></quiz-question>
+            <quiz-result></quiz-result>
           </div>
         </div>
       </div>
@@ -19,20 +21,24 @@
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
-import Process from './quiz/Process.vue'
-import Question from './quiz/Question.vue'
+import QuizProcess from './quiz/QuizProcess.vue'
+import QuizStarting from './quiz/QuizStarting.vue'
+import QuizQuestion from './quiz/QuizQuestion.vue'
+import QuizResult from './quiz/QuizResult.vue'
 import * as types from 'store/types'
 
 export default {
 
   components : {
-    Process,
-    Question,
+    QuizProcess,
+    QuizStarting,
+    QuizQuestion,
+    QuizResult,
   },
 
   computed: {
     ...mapState({
-      quiz: state => state.quiz.content,
+      quiz: 'currentQuiz',
     }),
   },
 
@@ -45,7 +51,7 @@ export default {
         level
       })
 
-      if (!this.quiz[level]) {
+      if (!this.quiz) {
         this.$store.dispatch({
           type: types.FETCH_QUIZ,
           level
