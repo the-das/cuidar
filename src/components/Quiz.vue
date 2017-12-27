@@ -1,16 +1,20 @@
 <template>
-  <div class="container">
-    <div class="columns">
-      <div class="column is-half is-offset-one-quarter">
-        <process></process>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-half is-offset-one-quarter">
+            <process></process>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-half is-offset-one-quarter">
+            <question></question>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="columns">
-      <div class="column is-half is-offset-one-quarter">
-        <question></question>
-      </div>
-    </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -47,6 +51,9 @@ export default {
           level
         })
       }
+    },
+    nextQuestion() {
+      
     },
   },
 

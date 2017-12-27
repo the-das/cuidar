@@ -79,7 +79,7 @@
             <div class="control">
               <span class="tag is-rounded is-medium">{{ question.answer == question.reply ? '정답' : '틀림' }}</span>
               <button class="button is-primary">
-                다음 문제
+                다음 문제 &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
               </button>
             </div>
           </div>
