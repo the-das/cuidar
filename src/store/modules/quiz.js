@@ -33,28 +33,33 @@ const state = {
    *       "explanation": "10 + 1 = 11"
    *     }
    *   ]
-   *  }
+   *  },
+   *  "intermediate": {},
+   *  "export": {},
    */
   },
-  result: {
-    beginner: [],
-    intermediate: [],
-    export: [],
+  results: {
+    // beginner: [],
+    // intermediate: [],
+    // export: [],
   },
   currentLevel: undefined,
 }
 
 const getters = {
   currentQuiz: (state) => state.content[state.currentLevel],
-  currentResult: (state) => state.result[state.currentLevel],
 }
 
 const mutations = {
   [types.RECEIVE_QUIZ] (state, {level, quiz}) {
     state.content[level] = quiz
+    state.results = { ...state.result, [level]: [] }
   },
   [types.SELECT_LEVEL] (state, {level}) {
     state.currentLevel = level
+  },
+  [types.ANSWER_QUIZ] (state, {result}) {
+    state.results[state.currentLevel].push(result)
   },
 }
 

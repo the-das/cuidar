@@ -6,7 +6,7 @@ export const RECEIVE_META = 'meta/RECEIVE_META'
 export const FETCH_QUIZ = 'quiz/FETCH_QUIZ'
 export const RECEIVE_QUIZ = 'quiz/RECEIVE_QUIZ'
 export const SELECT_LEVEL = 'quiz/SELECT_LEVEL'
+export const ANSWER_QUIZ = 'quiz/ANSWER_QUIZ'
 
-// Result
-export const ANSWER_QUESTION = 'result/ANSWER_QUESTION'
+// todo: delete
 export const NEXT_QUESTION = 'result/NEXT_QUESTION'

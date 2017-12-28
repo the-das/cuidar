@@ -21,7 +21,7 @@ const state = {
       },
       {
         "title": "전문가",
-        "level": "beginner",
+        "level": "expert",
         "content": 10
       }
     ]

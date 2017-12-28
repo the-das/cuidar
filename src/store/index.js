@@ -15,4 +15,19 @@ const store = new Vuex.Store({
   }
 })
 
+if (module.hot) {
+  module.hot.accept(['./getters', './modules/meta', './modules/quiz'], () => {
+    const newGetters = require('./getters').default
+    const newModuleMeta = require('./modules/meta').default
+    const newModuleQuiz = require('./modules/quiz').default
+    store.hotUpdate({
+      getters: newGetters,
+      modules: {
+        meta: newModuleMeta,
+        quiz: newModuleQuiz,
+      }
+    })
+  })
+}
+
 export default store

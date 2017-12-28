@@ -58,8 +58,11 @@ export default {
         })
       }
     },
-    nextQuestion() {
-      
+    answerQuiz(anwserResult) {
+      this.$store.commit({
+        type: types.ANSWER_QUIZ,
+        anwserResult
+      })
     },
   },
 
