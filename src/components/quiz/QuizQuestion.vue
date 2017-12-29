@@ -40,7 +40,7 @@
         </div>
       </div>
     </div>
-    <template v-if="!question.reply">
+    <template v-if="!result">
       <!-- Check Result -->
       <div class="field is-horizontal">
         <div class="field-label"></div>
@@ -77,7 +77,7 @@
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <span class="tag is-rounded is-medium">{{ question.answer == question.reply ? '정답' : '틀림' }}</span>
+              <span class="tag is-rounded is-medium">{{ result ? '정답' : '틀림' }}</span>
               <button class="button is-primary">
                 다음 문제 &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
               </button>
@@ -95,6 +95,7 @@ export default {
   data() {
     return {
       selected: undefined,
+      result: undefined,
       question: {
         "question": "Vue + Vuex = ?",
         "text": "1 + 1 = 2,\n1 + 2 = ?,\n1 + 3 = 4",
@@ -106,14 +107,15 @@ export default {
         ],
         "answer": "4",
         "explanation": "Vue + Vuex = Vue",
-        "reply": undefined,
       },
     }
   },
 
   methods: {
     checkReply() {
-      this.question.reply = this.selected
+      const result = this.question.answer == this.selected ? 'OK' : 'NO'
+      this.result = result
+      this.$emit('answerQuiz', {result})
     },
   },
 }
