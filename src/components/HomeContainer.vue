@@ -28,7 +28,7 @@ export default {
 
   methods: {
     ...mapActions({
-      fetchMeta: types.FETCH_META,
+      'fetchMeta': types.FETCH_META,
     }),
   },
 
