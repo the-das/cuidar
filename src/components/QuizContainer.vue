@@ -10,7 +10,7 @@
         <div class="columns">
           <div class="column is-half is-offset-one-quarter">
             <quiz-starting></quiz-starting>
-            <quiz-question></quiz-question>
+            <quiz-question v-on:answerQuiz="answerQuiz"></quiz-question>
             <quiz-result></quiz-result>
           </div>
         </div>
@@ -38,36 +38,29 @@ export default {
 
   computed: {
     ...mapState({
-      quiz: 'currentQuiz',
+      'currentQuiz': state => state.quiz.content[state.quiz.currentLevel]
     }),
+    ...mapGetters([
+      'currentList'
+    ]),
   },
 
   methods: {
-    fetchQuiz() {
-      const level = this.$route.params.level
-
-      this.$store.commit({
-        type: types.SELECT_LEVEL,
-        level
-      })
-
-      if (!this.quiz) {
-        this.$store.dispatch({
-          type: types.FETCH_QUIZ,
-          level
-        })
-      }
-    },
-    answerQuiz(anwserResult) {
-      this.$store.commit({
-        type: types.ANSWER_QUIZ,
-        anwserResult
-      })
-    },
+    ...mapMutations({
+      'selectLevel': types.SELECT_LEVEL,
+      'answerQuiz': types.ANSWER_QUIZ,
+    }),
+    ...mapActions({
+      'fetchQuiz': types.FETCH_QUIZ,
+    }),
   },
 
   created() {
-    this.fetchQuiz()
+    const level = this.$route.params.level
+    this.selectLevel({level})
+    if (!this.currentQuiz) {
+      this.fetchQuiz({level})
+    }
   },
 }
 </script>
