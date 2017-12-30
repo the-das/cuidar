@@ -20,7 +20,7 @@
       <nav class="level is-mobile">
         <div class="level-left">
           <div class="level-item">
-            <router-link class="button" to="/quiz/beginner">
+            <router-link class="button" to="/quiz/intermediate">
               중급자 &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
             </router-link>
           </div>
@@ -36,7 +36,7 @@
       <nav class="level is-mobile">
         <div class="level-left">
           <div class="level-item">
-            <router-link class="button" to="/quiz/beginner">
+            <router-link class="button" to="/quiz/expert">
               고급자 &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
             </router-link>
           </div>

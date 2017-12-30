@@ -16,8 +16,8 @@
 <script>
 export default {
   props: [
-    'meta'
-  ]
+    'meta',
+  ],
 }
 </script>
 

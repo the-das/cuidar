@@ -4,14 +4,25 @@
       <div class="container">
         <div class="columns">
           <div class="column is-half is-offset-one-quarter">
-            <quiz-process></quiz-process>
+            <quiz-process
+              v-if="quizCollection"
+              v-bind:quizCollection="quizCollection"></quiz-process>
           </div>
         </div>
         <div class="columns">
           <div class="column is-half is-offset-one-quarter">
-            <quiz-starting></quiz-starting>
-            <quiz-question v-on:answerQuiz="answerQuiz"></quiz-question>
-            <quiz-result></quiz-result>
+            <template v-if="quizResult && quizResult.length == 0">
+              <quiz-starting
+                v-on:nextQuiz="nextQuiz"></quiz-starting>
+            </template>
+            <template v-else-if="quizResult && quizResult.length < 10">
+              <quiz-question
+                v-on:answerQuiz="answerQuiz"
+                v-on:nextQuiz="nextQuiz"></quiz-question>
+            </template>
+            <template v-else>
+              <quiz-result></quiz-result>
+            </template>
           </div>
         </div>
       </div>
@@ -37,17 +48,19 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      'currentQuiz': state => state.quiz.content[state.quiz.currentLevel]
-    }),
-    ...mapGetters([
-      'currentList'
+    ...mapState([
+      'currentIndex',
     ]),
+    ...mapGetters({
+      quizCollection: 'currentQuizCollection',
+      quizResult: 'currentQuizResult',
+    }),
   },
 
   methods: {
     ...mapMutations({
       'selectLevel': types.SELECT_LEVEL,
+      'nextQuiz': types.NEXT_QUIZ,
       'answerQuiz': types.ANSWER_QUIZ,
     }),
     ...mapActions({
@@ -55,11 +68,11 @@ export default {
     }),
   },
 
-  created() {
+  mounted() {
     const level = this.$route.params.level
-    this.selectLevel({level})
-    if (!this.currentQuiz) {
-      this.fetchQuiz({level})
+    this.selectLevel({ level })
+    if (!this.currentQuizSet) {
+      this.fetchQuiz({ level })
     }
   },
 }

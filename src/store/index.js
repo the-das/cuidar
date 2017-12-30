@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import * as getters from './getters'
+// import * as getters from './getters'
 import meta from './modules/meta'
 import quiz from './modules/quiz'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  getters,
+  // getters,
   modules: {
     meta,
     quiz,
@@ -17,11 +17,11 @@ const store = new Vuex.Store({
 
 if (module.hot) {
   module.hot.accept(['./getters', './modules/meta', './modules/quiz'], () => {
-    const newGetters = require('./getters').default
+    // const newGetters = require('./getters').default
     const newModuleMeta = require('./modules/meta').default
     const newModuleQuiz = require('./modules/quiz').default
     store.hotUpdate({
-      getters: newGetters,
+      // getters: newGetters,
       modules: {
         meta: newModuleMeta,
         quiz: newModuleQuiz,

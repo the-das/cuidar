@@ -1,9 +1,11 @@
+import { set } from 'vue'
 import API from 'api'
 import * as types from 'store/types'
 
 const state = {
-  content: {
+  collections: {
     // "beginner": {
+    //   "level": "beginner",
     //   "title": "다스는 누구꺼?",
     //   "subject": "초심자",
     //   "time": "10분",
@@ -41,33 +43,40 @@ const state = {
     // intermediate: [],
     // export: [],
   },
-  currentLevel: undefined,
-  currentIndex: undefined,
+  currentLevel: 'undefined',
+  currentIndex: 0,
 }
 
 const getters = {
-  currentList: (state) => state.content[state.currentLevel],
-  // currentQuiz: (state) => state.currentLevel && state.content[state.currentLevel],
+  currentQuizCollection: (state) => state.collections[state.currentLevel],
+  currentQuizResult: (state) => state.results[state.currentLevel],
+  // currentQuiz: (state) => {
+  //   state.collections[state.currentLevel].content[state.currentIndex]
+  // },
 }
 
 const mutations = {
-  [types.SELECT_LEVEL] (state, {level}) {
-    state.currentLevel = level
-  },
-  [types.RECEIVE_QUIZ] (state, {level, quiz}) {
-    state.content[level] = quiz
+  [types.RECEIVE_QUIZ] (state, { quiz, level }) {
+    state.collections = { ...state.collections, [level]: quiz }
     state.results = { ...state.results, [level]: [] }
   },
-  [types.ANSWER_QUIZ] (state, {result}) {
+  [types.SELECT_LEVEL] (state, { level }) {
+    state.currentLevel = level
+  },
+  [types.NEXT_QUIZ] (state) {
+    console.log('NEXT_QUIZ');
+    state.currentIndex += 1
+  },
+  [types.ANSWER_QUIZ] (state, { result }) {
     state.results[state.currentLevel].push(result)
   },
 }
 
 const actions = {
-  [types.FETCH_QUIZ] (context, {level}) {
+  [types.FETCH_QUIZ] (context, { level }) {
     API.getQuiz(level)
       .then(quiz => {
-        context.commit(types.RECEIVE_QUIZ, {level, quiz})
+        context.commit(types.RECEIVE_QUIZ, { quiz, level })
       })
   },
 }

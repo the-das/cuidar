@@ -32,7 +32,7 @@ export default {
     }),
   },
 
-  created() {
+  mounted() {
     if (!this.meta) {
       this.fetchMeta()
     }
