@@ -10,10 +10,10 @@
           </div>
         </div>
         <div class="level-right">
-          <p class="level-item"><strong>10/10</strong></p>
+          <p class="level-item"><strong>0/10</strong></p>
         </div>
       </nav>
-      <progress class="progress is-primary" value="100" max="100">100%</progress>
+      <progress class="progress is-primary" value="" max="100"></progress>
     </div>
     <br>
     <div>
@@ -26,10 +26,10 @@
           </div>
         </div>
         <div class="level-right">
-          <p class="level-item"><strong>5/10</strong></p>
+          <p class="level-item"><strong>0/10</strong></p>
         </div>
       </nav>
-      <progress class="progress is-primary" value="50" max="100">50%</progress>
+      <progress class="progress is-primary" value="" max="100"></progress>
     </div>
     <br>
     <div>
@@ -45,7 +45,7 @@
           <p class="level-item"><strong>0/10</strong></p>
         </div>
       </nav>
-      <progress class="progress is-primary" value="15" max="100">30%</progress>
+      <progress class="progress is-primary" value="" max="100"></progress>
     </div>
   </div>
 </template>

@@ -3,24 +3,24 @@
     <!-- Question -->
     <div class="field is-horizontal">
       <div class="field-label is-normal">
-        <label class="label">문제 1</label>
+        <label class="label">문제 {{index + 1}}</label>
       </div>
       <div class="field-body">
         <div class="field">
           <p class="control">
-            <input class="input is-static" type="text" v-bind:value="question.question" readonly>
+            <input class="input is-static" type="text" v-bind:value="quiz.question" readonly>
           </p>
         </div>
       </div>
     </div>
-    <template v-if="question.text">
+    <template v-if="quiz.text">
       <!-- Text -->
       <div class="field is-horizontal">
         <div class="field-label is-normal"></div>
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <textarea class="textarea" type="text" readonly v-model="question.text"></textarea>
+              <textarea class="textarea" type="text" readonly v-model="quiz.text"></textarea>
             </div>
           </div>
         </div>
@@ -31,9 +31,12 @@
       <div class="field-label is-normal"></div>
       <div class="field-body">
         <div class="field">
-          <div class="control" v-for="(el, index) in question.example" v-bind:key="index">
+          <div class="control" v-for="(el, index) in quiz.example" v-bind:key="index">
             <label class="radio">
-              <input type="radio" name="question-example" v-bind:value="index + 1" v-model="selected" v-bind:disabled="question.reply">
+              <input type="radio" name="question-example"
+                v-bind:value="index + 1"
+                v-model="selected"
+                v-bind:disabled="result">
               {{ el }}
             </label>
           </div>
@@ -66,7 +69,7 @@
         <div class="field-body">
           <div class="field">
             <p class="control">
-              <input class="input is-static" type="text" v-bind:value="question.explanation" readonly>
+              <input class="input is-static" type="text" v-bind:value="quiz.explanation" readonly>
             </p>
           </div>
         </div>
@@ -77,8 +80,9 @@
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <span class="tag is-rounded is-medium">{{ result ? '정답' : '틀림' }}</span>
-              <button class="button is-primary">
+              <span class="tag is-rounded is-medium">{{ result == 'OK' ? '정답' : '틀림' }}</span>
+              <button class="button is-primary"
+                v-on:click="nextQuiz">
                 다음 문제 &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i>
               </button>
             </div>
@@ -91,31 +95,28 @@
 
 <script>
 export default {
+  props: [
+    'index',
+    'quiz',
+  ],
 
   data() {
     return {
       selected: undefined,
       result: undefined,
-      question: {
-        "question": "Vue + Vuex = ?",
-        "text": "1 + 1 = 2,\n1 + 2 = ?,\n1 + 3 = 4",
-        "example": [
-          "React",
-          "Polymer",
-          "Angular",
-          "Vue"
-        ],
-        "answer": "4",
-        "explanation": "Vue + Vuex = Vue",
-      },
     }
   },
 
   methods: {
     checkReply() {
-      const result = this.question.answer == this.selected ? 'OK' : 'NO'
+      const result = this.quiz.answer == this.selected ? 'OK' : 'NO'
       this.result = result
       this.$emit('answerQuiz', {result})
+    },
+    nextQuiz() {
+      this.selected = undefined
+      this.result = undefined
+      this.$emit('nextQuiz')
     },
   },
 }

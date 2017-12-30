@@ -43,16 +43,18 @@ const state = {
     // intermediate: [],
     // export: [],
   },
-  currentLevel: 'undefined',
-  currentIndex: 0,
+  currentLevel: undefined,
+  currentIndex: undefined,
 }
 
 const getters = {
   currentQuizCollection: (state) => state.collections[state.currentLevel],
   currentQuizResult: (state) => state.results[state.currentLevel],
-  // currentQuiz: (state) => {
-  //   state.collections[state.currentLevel].content[state.currentIndex]
-  // },
+  currentQuiz: (state) => {
+    return state.collections[state.currentLevel]
+      ? state.collections[state.currentLevel].content[state.currentIndex]
+      : undefined
+  }
 }
 
 const mutations = {
@@ -64,8 +66,11 @@ const mutations = {
     state.currentLevel = level
   },
   [types.NEXT_QUIZ] (state) {
-    console.log('NEXT_QUIZ');
-    state.currentIndex += 1
+    if (!state.currentIndex && state.currentIndex != 0) {
+      state.currentIndex = 0
+    } else {
+      state.currentIndex++
+    }
   },
   [types.ANSWER_QUIZ] (state, { result }) {
     state.results[state.currentLevel].push(result)

@@ -6,22 +6,26 @@
           <div class="column is-half is-offset-one-quarter">
             <quiz-process
               v-if="quizCollection"
-              v-bind:quizCollection="quizCollection"></quiz-process>
+              v-bind:quizCollection="quizCollection"
+              v-bind:quizResult="quizResult"></quiz-process>
           </div>
         </div>
         <div class="columns">
           <div class="column is-half is-offset-one-quarter">
-            <template v-if="quizResult && quizResult.length == 0">
-              <quiz-starting
-                v-on:nextQuiz="nextQuiz"></quiz-starting>
-            </template>
-            <template v-else-if="quizResult && quizResult.length < 10">
+            <template v-if="quiz">
               <quiz-question
+                v-bind:index="index"
+                v-bind:quiz="quiz"
                 v-on:answerQuiz="answerQuiz"
                 v-on:nextQuiz="nextQuiz"></quiz-question>
             </template>
-            <template v-else>
-              <quiz-result></quiz-result>
+            <template v-if="!quiz && !index">
+              <quiz-starting
+                v-on:nextQuiz="nextQuiz"></quiz-starting>
+            </template>
+            <template v-else-if="index == quizCollection.content.length">
+              <quiz-result
+                v-bind:quizResult="quizResult"></quiz-result>
             </template>
           </div>
         </div>
@@ -48,12 +52,13 @@ export default {
   },
 
   computed: {
-    ...mapState([
-      'currentIndex',
-    ]),
+    ...mapState({
+      index: state => state.quiz.currentIndex,
+    }),
     ...mapGetters({
       quizCollection: 'currentQuizCollection',
       quizResult: 'currentQuizResult',
+      quiz: 'currentQuiz',
     }),
   },
 
